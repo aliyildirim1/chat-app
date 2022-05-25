@@ -5,11 +5,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../helper/helperfunctions.dart';
-import 'chatRoomsScreen.dart';
+import 'chat_room_screen.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
-   const SignIn(this.toggle, {Key? key}) : super(key: key);
+  const SignIn(this.toggle, {Key? key}) : super(key: key);
 
   @override
   _SignInState createState() => _SignInState();
@@ -29,7 +29,7 @@ class _SignInState extends State<SignIn> {
     if (formKey.currentState!.validate()) {
       HelperFunctions.saveUserEmailSharedPreference(
           emailTextEditingController.text);
-           databaseMethods
+      databaseMethods
           .getUserByUserEmail(emailTextEditingController.text)
           .then((value) {
         snapshotUserInfo = value;
@@ -41,16 +41,14 @@ class _SignInState extends State<SignIn> {
         isLoading = true;
       });
 
-     
-
       authMethods
           .signInWithEmailAndPassword(emailTextEditingController.text,
               passwordTextEditingController.text)
           .then((value) {
         if (value != null) {
           HelperFunctions.saveUserLoggedInSharedPreference(true);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => const ChatRoom()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const ChatRoom()));
         }
       });
     }
@@ -59,18 +57,27 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(100.0),
-          child: appBarMain(context)),
-      body: SingleChildScrollView(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bg_image.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Container(
-          height: MediaQuery.of(context).size.height - 50,
+          height: MediaQuery.of(context).size.height,
           alignment: Alignment.bottomCenter,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Text('chatApp',
+                    style: Theme.of(context).textTheme.headline4!.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 30),
                 Form(
                   key: formKey,
                   child: Column(
@@ -81,7 +88,7 @@ class _SignInState extends State<SignIn> {
                                       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(val!)
                               ? null
-                              : "Please provide a valid emailid";
+                              : "Lütfen geçerli bir e-posta kimliği sağlayın";
                         },
                         controller: emailTextEditingController,
                         style: simpleTextStyle(),
@@ -92,11 +99,11 @@ class _SignInState extends State<SignIn> {
                         validator: (val) {
                           return val!.length > 6
                               ? null
-                              : "Please Provide password 6+ character";
+                              : "Lütfen 6+ karakter giriniz";
                         },
                         controller: passwordTextEditingController,
                         style: simpleTextStyle(),
-                        decoration: textFieldInputDecoration("password"),
+                        decoration: textFieldInputDecoration("şifre"),
                       ),
                     ],
                   ),
@@ -107,9 +114,10 @@ class _SignInState extends State<SignIn> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Text(
-                      "Forgot Password?",
+                      "Şifreni mi unuttun?",
                       style: simpleTextStyle(),
                     ),
                   ),
@@ -126,31 +134,17 @@ class _SignInState extends State<SignIn> {
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     decoration: BoxDecoration(
-                        gradient: const LinearGradient(colors: [
-                          Color(0xff007EF4),
-                          Color(0xff2A75BC)
-                        ]),
+                        gradient: const LinearGradient(
+                            colors: [Color(0xff007EF4), Color(0xff2A75BC)]),
                         borderRadius: BorderRadius.circular(30)),
                     child: Text(
-                      "Sign In",
+                      "Giriş Yap",
                       style: mediumTextStyle(),
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 16,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(30)),
-                  child: const Text(
-                    "Sign In with Google",
-                    style: TextStyle(color: Colors.black87, fontSize: 17),
-                  ),
                 ),
                 const SizedBox(
                   height: 16,
@@ -159,8 +153,9 @@ class _SignInState extends State<SignIn> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have account",
-                      style: mediumTextStyle(),
+                      "Hesabın yok mu?",
+                      style:
+                          TextStyle(color: Colors.grey.shade300, fontSize: 16),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -169,8 +164,8 @@ class _SignInState extends State<SignIn> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: const Text(
-                          "Register now",
-                          style:  TextStyle(
+                          "Kaydol",
+                          style: TextStyle(
                               color: Colors.white,
                               fontSize: 17,
                               decoration: TextDecoration.underline),

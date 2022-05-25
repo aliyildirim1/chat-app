@@ -1,8 +1,12 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:chat_app_message/models/users.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthMethods {
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  
   Users? _userFromFirebaseUser(User user) {
     return user != null ? Users(uid: user.uid) : null;
   }
@@ -28,6 +32,7 @@ class AuthMethods {
     } catch (e) {
       // ignore: avoid_print
       print(e.toString());
+      
     }
   }
 
@@ -37,15 +42,17 @@ class AuthMethods {
     } catch (e) {
       // ignore: avoid_print
       print(e.toString());
+      return null;
     }
   }
 
-  Future signOut() async {
+  Future<void> signOut() async {
     try {
       return await _auth.signOut();
     } catch (e) {
       // ignore: avoid_print
       print(e.toString());
+      
     }
   }
 }

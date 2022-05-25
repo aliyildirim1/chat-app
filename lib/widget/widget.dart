@@ -13,12 +13,13 @@ Widget appBarMain(BuildContext context) {
 
 InputDecoration textFieldInputDecoration(String hintText) {
   return InputDecoration(
+      border: const OutlineInputBorder(),
       hintText: hintText,
       hintStyle: const TextStyle(color: Colors.white54),
-      focusedBorder:
-          const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-      enabledBorder:
-          const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)));
+      focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white)),
+      enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white)));
 }
 
 TextStyle simpleTextStyle() {

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'package:chat_app_message/helper/constants.dart';
 import 'package:chat_app_message/services/database.dart';
 import 'package:chat_app_message/views/conversation_screen.dart';
@@ -112,7 +114,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(100.0),
+          preferredSize: const Size.fromHeight(70.0),
           child: appBarMain(context)),
       body: Column(
         children: [
@@ -138,10 +140,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
-                          gradient: const LinearGradient(colors: [
-                            Color(0x36FFFFFF),
-                            Color(0x0FFFFFFF)
-                          ]),
+                          gradient: const LinearGradient(
+                              colors: [Color(0x36FFFFFF), Color(0x0FFFFFFF)]),
                           borderRadius: BorderRadius.circular(40)),
                       padding: const EdgeInsets.all(12),
                       child: Image.asset("assets/images/search_white.png")),
