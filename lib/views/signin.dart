@@ -3,6 +3,7 @@ import 'package:chat_app_message/services/database.dart';
 import 'package:chat_app_message/widget/widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../helper/helperfunctions.dart';
 import 'chat_room_screen.dart';
@@ -75,8 +76,8 @@ class _SignInState extends State<SignIn> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text('chatApp',
-                    style: Theme.of(context).textTheme.headline4!.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
+                    style: GoogleFonts.odibeeSans(
+                        fontSize: 50, color: Colors.white)),
                 const SizedBox(height: 30),
                 Form(
                   key: formKey,
@@ -134,8 +135,7 @@ class _SignInState extends State<SignIn> {
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                            colors: [Color(0xff007EF4), Color(0xff2A75BC)]),
+                        border: Border.all(color: Colors.white),
                         borderRadius: BorderRadius.circular(30)),
                     child: Text(
                       "Giriş Yap",

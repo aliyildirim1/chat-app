@@ -4,6 +4,7 @@ import 'package:chat_app_message/services/database.dart';
 import 'package:chat_app_message/views/chat_room_screen.dart';
 import 'package:chat_app_message/widget/widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUp extends StatefulWidget {
   final Function toggle;
@@ -60,7 +61,7 @@ class _SignUpState extends State<SignUp> {
           ? const Center(child: CircularProgressIndicator())
           : Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 50,
+              height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("assets/images/bg_image.png"),
@@ -73,110 +74,118 @@ class _SignUpState extends State<SignUp> {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Column(children: [
-                            TextFormField(
-                              validator: (val) {
-                                return val!.isEmpty || val.length < 2
-                                    ? "Please Provide a valid username"
-                                    : null;
-                              },
-                              controller: userNameTextEditingController,
-                              style: simpleTextStyle(),
-                              decoration:
-                                  textFieldInputDecoration("kullanıcı adı"),
-                            ),
-                            TextFormField(
-                              validator: (val) {
-                                return RegExp(
-                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                        .hasMatch(val!)
-                                    ? null
-                                    : "Please provide a valid emailid";
-                              },
-                              controller: emailTextEditingController,
-                              style: simpleTextStyle(),
-                              decoration: textFieldInputDecoration("email"),
-                            ),
-                            TextFormField(
-                              obscureText: true,
-                              validator: (val) {
-                                return val!.length > 6
-                                    ? null
-                                    : "Please Provide password 6+ character";
-                              },
-                              controller: passwordTextEditingController,
-                              style: simpleTextStyle(),
-                              decoration: textFieldInputDecoration("şifre"),
-                            ),
-                          ]),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              signMeUp();
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              width: MediaQuery.of(context).size.width,
-                              padding: const EdgeInsets.symmetric(vertical: 20),
-                              decoration: BoxDecoration(
-                                  gradient: const LinearGradient(colors: [
-                                    Color(0xff007EF4),
-                                    Color(0xff2A75BC)
-                                  ]),
-                                  borderRadius: BorderRadius.circular(30)),
-                              child: Text(
-                                "Kaydol",
-                                style: mediumTextStyle(),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('chatApp',
+                            style: GoogleFonts.odibeeSans(
+                                fontSize: 50, color: Colors.white)),
+                        Form(
+                          key: formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                "Zaten hesabım var.",
-                                style: TextStyle(
-                                    color: Colors.grey.shade300, fontSize: 16),
+                              Column(children: [
+                                TextFormField(
+                                  validator: (val) {
+                                    return val!.isEmpty || val.length < 2
+                                        ? "Please Provide a valid username"
+                                        : null;
+                                  },
+                                  controller: userNameTextEditingController,
+                                  style: simpleTextStyle(),
+                                  decoration:
+                                      textFieldInputDecoration("kullanıcı adı"),
+                                ),
+                                TextFormField(
+                                  validator: (val) {
+                                    return RegExp(
+                                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                            .hasMatch(val!)
+                                        ? null
+                                        : "Please provide a valid emailid";
+                                  },
+                                  controller: emailTextEditingController,
+                                  style: simpleTextStyle(),
+                                  decoration: textFieldInputDecoration("email"),
+                                ),
+                                TextFormField(
+                                  obscureText: true,
+                                  validator: (val) {
+                                    return val!.length > 6
+                                        ? null
+                                        : "Please Provide password 6+ character";
+                                  },
+                                  controller: passwordTextEditingController,
+                                  style: simpleTextStyle(),
+                                  decoration: textFieldInputDecoration("şifre"),
+                                ),
+                              ]),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              const SizedBox(
+                                height: 8,
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  widget.toggle();
+                                  signMeUp();
                                 },
                                 child: Container(
+                                  alignment: Alignment.center,
+                                  width: MediaQuery.of(context).size.width,
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 8),
-                                  child: const Text(
-                                    "Giriş yap",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17,
-                                        decoration: TextDecoration.underline),
+                                      const EdgeInsets.symmetric(vertical: 20),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(30)),
+                                  child: Text(
+                                    "Kaydol",
+                                    style: mediumTextStyle(),
                                   ),
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Zaten hesabım var.",
+                                    style: TextStyle(
+                                        color: Colors.grey.shade300,
+                                        fontSize: 16),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      widget.toggle();
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8),
+                                      child: const Text(
+                                        "Giriş yap",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 17,
+                                            decoration:
+                                                TextDecoration.underline),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 50,
                               )
                             ],
                           ),
-                          const SizedBox(
-                            height: 50,
-                          )
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

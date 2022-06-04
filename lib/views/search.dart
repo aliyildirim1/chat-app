@@ -5,6 +5,7 @@ import 'package:chat_app_message/services/database.dart';
 import 'package:chat_app_message/views/conversation_screen.dart';
 import 'package:chat_app_message/widget/widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -113,13 +114,21 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(70.0),
-          child: appBarMain(context)),
+      appBar: AppBar(
+        title: Text("chatApp", style: GoogleFonts.odibeeSans()),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/bg_image.png"),
+                  fit: BoxFit.fill)),
+        ),
+        elevation: 0.0,
+        centerTitle: true,
+      ),
       body: Column(
         children: [
           Container(
-            color: const Color(0X54FFFFFF),
+            color: Colors.grey.shade500,
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: Row(
               children: [
@@ -129,7 +138,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                       hintText: "search username...",
-                      hintStyle: TextStyle(color: Colors.white54),
+                      hintStyle: TextStyle(color: Colors.white),
                       border: InputBorder.none),
                 )),
                 GestureDetector(
@@ -141,7 +150,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       width: 40,
                       decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                              colors: [Color(0x36FFFFFF), Color(0x0FFFFFFF)]),
+                              colors: [Colors.purple, Colors.pink]),
                           borderRadius: BorderRadius.circular(40)),
                       padding: const EdgeInsets.all(12),
                       child: Image.asset("assets/images/search_white.png")),
