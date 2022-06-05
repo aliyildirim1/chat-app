@@ -4,6 +4,8 @@ import 'package:chat_app_message/widget/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'chat_room_screen.dart';
+
 class ConversationScreen extends StatefulWidget {
   const ConversationScreen({Key? key, this.chatRoomId}) : super(key: key);
   final String? chatRoomId;
@@ -61,6 +63,13 @@ class _ConversationScreenState extends State<ConversationScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: BackButton(
+     color: Colors.white,
+     onPressed: (){
+       Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const ChatRoom()));
+     },
+   ),  
         title: Text("chatApp", style: GoogleFonts.odibeeSans()),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
